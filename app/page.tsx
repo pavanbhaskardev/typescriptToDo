@@ -42,40 +42,39 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="w-96 mx-auto">
-      <h1 className="text-4xl text-center font-bold mt-5">Simple To Do list</h1>
-      <div className="flex gap-2 justify-center mt-5">
-        <input
-          value={todo}
-          onChange={(e) => setToDo(e.target.value)}
-          placeholder="enter task"
-          className="block  rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-        />
+    <>
+      <div>
+        <h1 className="text-4xl text-center font-bold mt-5">
+          Simple To Do list
+        </h1>
 
-        {editStatus.status ? (
-          <button
-            className="bg-orange-500 py-2 px-3 rounded-lg "
-            onClick={editItemOnList}
-          >
-            Edit
+        {/* created form component because the todo will be add even when we click enter key */}
+        <form
+          className="flex gap-2 justify-center mt-5"
+          onSubmit={(e) => {
+            e.preventDefault();
+            editStatus.status ? editItemOnList() : addItemToList();
+          }}
+        >
+          <input
+            value={todo}
+            onChange={(e) => setToDo(e.target.value)}
+            placeholder="enter task"
+            className="block  rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+
+          <button className="bg-orange-500 py-2 px-3 rounded-lg " type="submit">
+            {editStatus.status ? "Edit" : "Add"}
           </button>
-        ) : (
-          <button
-            className="bg-orange-500 py-2 px-3 rounded-lg "
-            onClick={addItemToList}
-          >
-            Add
-          </button>
-        )}
+        </form>
       </div>
-
       <Card
         todoList={todoList}
         setToDoList={setToDoList}
         setToDo={setToDo}
         setEditStatus={setEditStatus}
       />
-    </div>
+    </>
   );
 };
 
