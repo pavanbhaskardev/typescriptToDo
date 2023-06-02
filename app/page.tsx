@@ -88,8 +88,6 @@ const Home: React.FC = () => {
     )
       return;
 
-    console.log("let's see result", result);
-
     let draggedItem;
     let todo = todoList;
     let progress = inProgressList;
@@ -100,10 +98,10 @@ const Home: React.FC = () => {
       draggedItem = todoList[source.index];
       todo.splice(source.index, 1);
     } else if (source.droppableId === "progressList") {
-      draggedItem = todoList[source.index];
+      draggedItem = inProgressList[source.index];
       progress.splice(source.index, 1);
     } else {
-      draggedItem = todoList[source.index];
+      draggedItem = completeList[source.index];
       completed.splice(source.index, 1);
     }
 
@@ -116,6 +114,11 @@ const Home: React.FC = () => {
       completed.splice(destination.index, 0, draggedItem);
     }
 
+    console.log("draggedItem: " + draggedItem);
+    console.log("todo array", todo);
+    console.log("progress /array", progress);
+    console.log("done", completed);
+
     //finally setting states
     setToDoList(todo);
     setInProgressList(progress);
@@ -125,14 +128,14 @@ const Home: React.FC = () => {
   return (
     <>
       <DragDropContext onDragEnd={handleDragEnd}>
-        <div>
-          <h1 className="text-4xl text-center font-bold mt-5">
+        <div className="bg-darkPrimary h-screen overflow-y-scroll">
+          <h1 className="text-4xl text-center font-bold pt-5 text-zinc-400">
             Simple To Do list
           </h1>
 
           {/* created form component because the todo will be add even when we click enter key */}
           <form
-            className="flex gap-2 justify-center mt-5"
+            className="flex gap-2 justify-center mt-5 mobile:px-5"
             onSubmit={(e) => {
               e.preventDefault();
               editStatus.status ? editItemOnList() : addItemToList();
@@ -142,7 +145,7 @@ const Home: React.FC = () => {
               value={todo}
               onChange={(e) => setToDo(e.target.value)}
               placeholder="enter task"
-              className="block  rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="mobile:w-full md:w-1/2 lg:w-1/4 rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-400 sm:text-sm sm:leading-6"
             />
 
             <button
@@ -152,17 +155,17 @@ const Home: React.FC = () => {
               {editStatus.status ? "Edit" : "Add"}
             </button>
           </form>
+          <Card
+            todoList={todoList}
+            inProgressList={inProgressList}
+            completeList={completeList}
+            setToDoList={setToDoList}
+            setInProgressList={setInProgressList}
+            setCompleteList={setCompleteList}
+            setToDo={setToDo}
+            setEditStatus={setEditStatus}
+          />
         </div>
-        <Card
-          todoList={todoList}
-          inProgressList={inProgressList}
-          completeList={completeList}
-          setToDoList={setToDoList}
-          setInProgressList={setInProgressList}
-          setCompleteList={setCompleteList}
-          setToDo={setToDo}
-          setEditStatus={setEditStatus}
-        />
       </DragDropContext>
     </>
   );

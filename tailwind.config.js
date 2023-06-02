@@ -18,6 +18,9 @@ module.exports = {
       screens: {
         mobile: "320px",
       },
+      colors: {
+        darkPrimary: "#0F172A",
+      },
     },
   },
   plugins: [],

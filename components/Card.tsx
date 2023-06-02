@@ -59,7 +59,7 @@ const Card: React.FC<Props> = ({
   };
 
   return (
-    <div className="grid gap-4 w-[128] mx-5 mt-3 mobile:grid-cols-1 lg:grid-cols-3">
+    <div className=" grid gap-4 w-[128] px-5 pt-3 mobile:grid-cols-1 lg:grid-cols-3 bg-darkPrimary">
       {/* dropable list of todo's */}
       <Droppable droppableId="todoList">
         {(provided) => (
@@ -68,9 +68,9 @@ const Card: React.FC<Props> = ({
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            <div className="flex gap-2 mt-3 justify-center">
+            <div className="flex gap-2 mt-3 sm:justify-center">
               <div className="h-3 w-3 bg-red-500 rounded-full mt-2"></div>
-              <p className="text-lg mt-0">Todo</p>
+              <p className="text-lg mt-0 text-zinc-400">Todo</p>
             </div>
             {todoList.map((e, index) => {
               return (
@@ -81,12 +81,12 @@ const Card: React.FC<Props> = ({
                 >
                   {(provided) => (
                     <div
-                      className="mt-3 md:w-1/2 mx-auto lg:w-full w-full py-2 px-3 bg-white border-slate-300 border-2 rounded-lg flex justify-between"
+                      className="mt-3 md:w-1/2 mx-auto lg:w-full w-full py-2 px-3 bg-slate-800 border-slate-700 border-2 rounded-lg flex justify-between"
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       ref={provided.innerRef}
                     >
-                      <p>{e.toDoItem}</p>
+                      <p className="text-zinc-400">{e.toDoItem}</p>
                       <div className="flex gap-1 cursor-pointer">
                         <div onClick={() => deleteToDoItem(e.id, "todoList")}>
                           <DeleteIcon />
@@ -116,9 +116,9 @@ const Card: React.FC<Props> = ({
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            <div className="flex gap-2 mt-3 justify-center">
+            <div className="flex gap-2 mt-3 sm:justify-center">
               <div className="h-3 w-3 bg-blue-500 rounded-full mt-2"></div>
-              <p className="text-lg mt-0">In Progress</p>
+              <p className="text-lg mt-0 text-zinc-400">In Progress</p>
             </div>
             {inProgressList.map((e, index) => {
               return (
@@ -129,12 +129,12 @@ const Card: React.FC<Props> = ({
                 >
                   {(provided) => (
                     <div
-                      className="mt-3 md:w-1/2 mx-auto lg:w-full w-full py-2 px-3 bg-white border-slate-300 border-2 rounded-lg flex justify-between"
+                      className="mt-3 md:w-1/2 mx-auto lg:w-full w-full py-2 px-3 bg-slate-800 border-slate-700 border-2 rounded-lg flex justify-between"
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       ref={provided.innerRef}
                     >
-                      <p>{e.toDoItem}</p>
+                      <p className="text-zinc-400">{e.toDoItem}</p>
                       <div className="flex gap-1 cursor-pointer">
                         <div
                           onClick={() => deleteToDoItem(e.id, "progressList")}
@@ -161,13 +161,13 @@ const Card: React.FC<Props> = ({
       <Droppable droppableId="doneList">
         {(provided) => (
           <div
-            className="doneList-container"
+            className="doneList-container mb-5"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            <div className="flex gap-2 mt-3 justify-center">
+            <div className="flex gap-2 mt-3 sm:justify-center">
               <div className="h-3 w-3 bg-green-500 rounded-full mt-2"></div>
-              <p className="text-lg mt-0">Done</p>
+              <p className="text-lg mt-0 text-zinc-400">Done</p>
             </div>
             {completeList.map((e, index) => {
               return (
@@ -178,12 +178,14 @@ const Card: React.FC<Props> = ({
                 >
                   {(provided) => (
                     <div
-                      className="mt-3 md:w-1/2 mx-auto lg:w-full w-full py-2 px-3 bg-white border-slate-300 border-2 rounded-lg flex justify-between"
+                      className="mt-3 md:w-1/2 mx-auto lg:w-full w-full py-2 px-3 bg-slate-800 border-slate-700 border-2 rounded-lg flex justify-between"
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       ref={provided.innerRef}
                     >
-                      <p>{e.toDoItem}</p>
+                      <p className="text-zinc-400">
+                        <s>{e.toDoItem}</s>
+                      </p>
                       <div className="flex gap-1 cursor-pointer">
                         <div onClick={() => deleteToDoItem(e.id, "doneList")}>
                           <DeleteIcon />
