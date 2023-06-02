@@ -4,7 +4,6 @@ import Card from "@/components/Card";
 import { TodoInterface } from "@/components/todoInterface";
 import { EditItem } from "@/components/editItemInterface";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { log } from "console";
 
 const Home: React.FC = () => {
   const [todo, setToDo] = useState<string | number>("");
@@ -114,11 +113,6 @@ const Home: React.FC = () => {
       completed.splice(destination.index, 0, draggedItem);
     }
 
-    console.log("draggedItem: " + draggedItem);
-    console.log("todo array", todo);
-    console.log("progress /array", progress);
-    console.log("done", completed);
-
     //finally setting states
     setToDoList(todo);
     setInProgressList(progress);
@@ -128,7 +122,7 @@ const Home: React.FC = () => {
   return (
     <>
       <DragDropContext onDragEnd={handleDragEnd}>
-        <div className="bg-darkPrimary h-screen overflow-y-scroll">
+        <div className="bg-darkPrimary">
           <h1 className="text-4xl text-center font-bold pt-5 text-zinc-400">
             Simple To Do list
           </h1>
