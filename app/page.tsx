@@ -124,7 +124,7 @@ const Home: React.FC = () => {
       <DragDropContext onDragEnd={handleDragEnd}>
         <div className="bg-darkPrimary">
           <h1 className="text-4xl text-center font-bold pt-5 text-zinc-400">
-            Simple To Do list
+            Todo list with drag & drop👌
           </h1>
 
           {/* created form component because the todo will be add even when we click enter key */}
